@@ -1,6 +1,6 @@
 # **Imgur Plus Bot** #
 
-[![Library](https://img.shields.io/badge/Python_Telegram_Beta-latest-af1a97.svg)](https://github.com/python-telegram-bot/python-telegram-bot)
+[![Library](https://img.shields.io/badge/Python_Telegram_Bot-latest-af1a97.svg)](https://github.com/python-telegram-bot/python-telegram-bot)
 [![Python](https://img.shields.io/badge/Python-3+-blue.svg)](https://www.python.org)
 [![Pillow-lib](https://img.shields.io/badge/Pillow-GitHub-green.svg)](https://github.com/python-pillow/Pillow)
 [![Request-lib](https://img.shields.io/badge/Requests-GitHub-green.svg)](https://github.com/requests/requests)
