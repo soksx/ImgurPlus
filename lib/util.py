@@ -7,41 +7,25 @@ from . import keyboards, imguploader
 #process_message util
 def process_message(bot, update):
     message = update.message
-    if message.photo:
-        select_res_msg(update)
-    elif message.document:
-        if "image" in message.document.mime_type:
-            select_res_msg(update)
-        else:
-            send_img_msg(update)
-    else:
-        send_img_msg(update)
+    if message.photo or message.sticker or "image" in message.document.mime_type or "video/mp4" in message.document.mime_type:
+        upload_with_msg(bot, update, message)
+    #else:
+        #send_img_msg(update)
+ 
 
-#querycallback util
-def select_res(bot, update):
-    query = update.callback_query
-    bot.edit_message_text(text="Uploading image with %s as resolution..." % query.data, chat_id=query.message.chat_id, message_id=query.message.message_id)
-    if query.data != "custom":
-        upload_img(query.message.reply_to_message, query.data, query, bot)
+ #querycallback util
+def upload_with_msg(bot, update, message):
+    text = "Image is uploading..."
+    msg_reply =  update.effective_message.reply_text(reply_to_message_id=message.message_id, text=text)
+    upload_img(message, bot, msg_reply)
 
-# function to select res
-def select_res_msg(update):
-    text = "Select your resolution: "
-    keyboard = keyboards.defaul_res()
-    update.effective_message.reply_text(reply_to_message_id=update.message.message_id, text=text, reply_markup=keyboard)
-
-# function to send img
-def send_img_msg(update):
-    text = "Please send a photo to de bot"
-    update.effective_message.reply_text(text=text)
-	
 # function to upload img and edit reply with link
-def upload_img(file, res, query, bot):
-    image = None
+def upload_img(file, bot, reply):
+    image = link = None
     if file.photo:
         image = bot.getFile(file.photo[len(file.photo)-1].file_id)
+    elif file.sticker: 
+        image = bot.getFile(file.sticker.file_id)
     else:
         image = bot.getFile(file.document.file_id)
-    bot.edit_message_text(text=imguploader.upload_imgur(image, res), chat_id=query.message.chat_id, message_id=query.message.message_id, disable_web_page_preview=bool(True))
-
-        
+    bot.edit_message_text(text=imguploader.upload_imgur(image), chat_id=reply.chat_id, message_id=reply.message_id, disable_web_page_preview=bool(True))

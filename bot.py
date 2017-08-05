@@ -23,7 +23,6 @@ def main():
 
     # messages
     dp.add_handler(MessageHandler(~Filters.command, util.process_message, edited_updates=True))
-    dp.add_handler(CallbackQueryHandler(util.select_res))
     # handle errors
     dp.add_error_handler(error)
 
