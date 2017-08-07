@@ -10,3 +10,9 @@ def defaul_res():
     buttons_list = [[button0, button1, button2, button3], [button5]]
     keyboard = InlineKeyboardMarkup(buttons_list)
     return keyboard
+
+def github_link_kb():
+    button0 = InlineKeyboardButton(text="Source code", url="https://github.com/DcSoK/ImgurPlus")
+    buttons_list = [[button0]]
+    keyboard = InlineKeyboardMarkup(buttons_list)
+    return keyboard

@@ -1,11 +1,11 @@
 __autor__ = "sokk"
 
-from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler  
+from telegram.ext import Updater, MessageHandler, Filters, CommandHandler  
 import logging
 
 #files
 from config import botconfig
-from lib import util 
+from lib import util, commands 
 #from lib import database 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -23,6 +23,7 @@ def main():
 
     # messages
     dp.add_handler(MessageHandler(~Filters.command, util.process_message, edited_updates=True))
+    dp.add_handler(CommandHandler(('start'), commands.help_command))
     # handle errors
     dp.add_error_handler(error)
 
