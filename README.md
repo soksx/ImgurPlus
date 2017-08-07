@@ -25,10 +25,17 @@ sudo apt-get install -y python3-pip
 sudo pip3 install python-telegram-bot --upgrade
 sudo pip3 install requests
 sudo pip3 install Pillow
+pip install imageio
+pip install PyMySQL
 
 # If you have errors installing Pillow 
 sudo apt-get install python3-dev
 sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+
+# You will need install this first than imageio
+sudo apt-get install python3-dev python3-setuptools
+sudo apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev
+
 ```
 ---------------------------------
 
@@ -39,6 +46,8 @@ Download and install the newest version of python 3.X.X -> https://www.python.or
 pip install python-telegram-bot --upgrade
 pip install requests
 pip install Pillow
+pip install imageio
+pip install PyMySQL
 ```
 ---------------------------------
 
@@ -72,4 +81,12 @@ After installing the dependencies and editing the config, lets start the bot:
  git clone git@github.com:DcSoK/ImgurPlus.git
  cd imgurplus
  python bot.py
+```
+Configure database:
+```bash
+ #In Ubuntu or Windows using commands
+CREATE DATABASE dbname;
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON dbname.* TO 'username'@'%' WITH GRANT OPTION;
+mysql -u username -p dbname < db\imgurplus.sql
 ```
