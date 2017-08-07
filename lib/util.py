@@ -1,6 +1,6 @@
 import json
 
-from telegram import ParseMode, Message, document, forcereply
+from telegram import ParseMode, Message
 
 from . import imguploader, database
 from config import botconfig
