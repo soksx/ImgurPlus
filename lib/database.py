@@ -9,3 +9,17 @@ def insert_stats(user_id, user_name, file_id, file_path, imgur_link):
     conn.commit()
     cursor.close()
     conn.close()
+
+def get_stats(user_id):
+    conn = mariadb.connect(user=botconfig.db_user, passwd=botconfig.db_pass, db=botconfig.db_name, host=botconfig.db_host)
+    cursor = conn.cursor()
+    cursor.execute("SELECT count(id) FROM users_stats WHERE user_id = " + str(user_id))
+    result = []
+    for row in cursor:
+        result.append(row[0])
+    cursor.execute("SELECT count(id) FROM users_stats WHERE user_id = " + str(user_id) + " AND imgur_link LIKE 'http%'")
+    for row in cursor:
+        result.append(row[0])
+    cursor.close()
+    conn.close()
+    return result

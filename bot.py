@@ -24,6 +24,7 @@ def main():
     # messages
     dp.add_handler(MessageHandler(~Filters.command, util.process_message, edited_updates=True))
     dp.add_handler(CommandHandler(('start'), commands.help_command))
+    dp.add_handler(CommandHandler(('stats'), commands.stats_command))
     # handle errors
     dp.add_error_handler(error)
 
