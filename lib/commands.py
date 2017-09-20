@@ -1,8 +1,9 @@
 ﻿from telegram import ParseMode
 from telegram import MessageEntity
 from telegram import ParseMode
-from  . import database
+from . import database
 from . import keyboards
+from . import util
 
 def help_command(bot, update):
     keyboard = keyboards.github_link_kb()
@@ -12,4 +13,10 @@ def help_command(bot, update):
 def stats_command(bot, update):
     msgs = database.get_stats(update.message.chat_id)
     text = "<b>User Stats:</b>\n\n<b>•</b> Total uploads: " + str(msgs[0]) + "\n<b>•</b> Succesfully uploads: " + str(msgs[1])
+    update.message.reply_text(text=text, parse_mode=ParseMode.HTML)
+
+@util.only_admin
+def global_stats_command(bot, update):
+    msgs = database.get_global_stats(update.message.chat_id)
+    text = "<b>Global Stats:</b>\n\n<b>•</b> Total uploads: " + str(msgs[0]) + "\n<b>•</b> Succesfully uploads: " + str(msgs[1])
     update.message.reply_text(text=text, parse_mode=ParseMode.HTML)

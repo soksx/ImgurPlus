@@ -1,7 +1,7 @@
 import json
 
 from telegram import ParseMode, Message
-
+from functools import wraps
 from . import imguploader, database
 from config import botconfig
 
@@ -50,7 +50,7 @@ def upload_with_msg(bot, update, message):
 
 # funtion that declare invalid command
 def invalid_command(bot, update):
-    text = "This command is invalid"
+    text = "This command is only for admins"
     update.message.reply_text(text=text, quote=True)
 
 # function to define if command is only for admins
